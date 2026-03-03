@@ -1,0 +1,10 @@
+C:\Git\regfod\regfod\bin\x64\Release\regfod.exe.config
+C:\Git\regfod\regfod\bin\x64\Release\regfod.exe
+C:\Git\regfod\regfod\obj\x64\Release\regfod.csproj.AssemblyReference.cache
+C:\Git\regfod\regfod\obj\x64\Release\regfod.csproj.CoreCompileInputs.cache
+C:\Git\regfod\regfod\obj\x64\Release\regfod.exe
+C:\git\warp\regfod\regfod\bin\x64\Release\regfod.exe.config
+C:\git\warp\regfod\regfod\bin\x64\Release\regfod.exe
+C:\git\warp\regfod\regfod\obj\x64\Release\regfod.csproj.AssemblyReference.cache
+C:\git\warp\regfod\regfod\obj\x64\Release\regfod.csproj.CoreCompileInputs.cache
+C:\git\warp\regfod\regfod\obj\x64\Release\regfod.exe

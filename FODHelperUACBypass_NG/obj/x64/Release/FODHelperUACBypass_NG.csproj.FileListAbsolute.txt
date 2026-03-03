@@ -1,0 +1,10 @@
+C:\Git\Warp\regfod\regfod\bin\x64\Release\FODHelperUACBypass_NG.exe.config
+C:\Git\Warp\regfod\regfod\bin\x64\Release\FODHelperUACBypass_NG.exe
+C:\Git\Warp\regfod\regfod\obj\x64\Release\FODHelperUACBypass_NG.csproj.AssemblyReference.cache
+C:\Git\Warp\regfod\regfod\obj\x64\Release\FODHelperUACBypass_NG.csproj.CoreCompileInputs.cache
+C:\Git\Warp\regfod\regfod\obj\x64\Release\FODHelperUACBypass_NG.exe
+C:\Git\Warp\regfod\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe.config
+C:\Git\Warp\regfod\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe
+C:\Git\Warp\regfod\FODHelperUACBypass_NG\obj\x64\Release\FODHelperUACBypass_NG.csproj.AssemblyReference.cache
+C:\Git\Warp\regfod\FODHelperUACBypass_NG\obj\x64\Release\FODHelperUACBypass_NG.csproj.CoreCompileInputs.cache
+C:\Git\Warp\regfod\FODHelperUACBypass_NG\obj\x64\Release\FODHelperUACBypass_NG.exe
