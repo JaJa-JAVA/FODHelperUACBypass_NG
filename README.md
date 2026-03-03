@@ -1,5 +1,6 @@
-# FODHelperUACBypass_NG
-FODHelperUACBypass_NG
+# TL;DR FODHelperUACBypass_NG
+
+> ***FODHelperUACBypass_NG*** is a proof-of-concept implementation of the FODHelper UAC bypass technique from 2009, rewritten in C# and ***enhanced*** with modern evasion techniques such as indirect syscalls. instead of creating the registry keys we deconstructed it by ***creating a temporary key, populating that and then renaming it*** - using indirect syscalls to bypass EDR hooks, while still leveraging the original FODHelper UAC bypass method of hijacking the `ms-settings` protocol handler. This fully bypasses MDA and MDE on a fully updated and patched Windows 10/11 system as of march 2026, and is designed to be used in red team engagements and penetration tests to demonstrate the technique and its effectiveness against modern defenses.
 
 ## Usage
 
