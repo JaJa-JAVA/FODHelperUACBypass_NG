@@ -31,6 +31,10 @@ There's a default payload in the repository for testing purposes (***dialogbox.e
 .\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
 ```
 
+### Blog 
+
+A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG: Next-Gen Indirect Syscalls](https://threathunting.academy/blog/fodhelper-uac-bypass-ng-next-gen
+
 ### Youtube Demo
 
 [![FODHelperUACBypass_NG Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
