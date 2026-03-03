@@ -18,7 +18,8 @@ git clone https://github.com/ThreathuntingAcademy/FODHelperUACBypass_NG.git
 build the project using MSBuild or Visual Studio:
 
 ```powershell
-# Using MSBuild
+# Using MSBuild,  open a Developer Command Prompt for Visual Studio and run:
+cd c:\path\to\FODHelperUACBypass_NG
 msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
 
 # Or using Visual Studio
