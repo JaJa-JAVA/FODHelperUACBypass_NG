@@ -15,9 +15,11 @@ msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Rele
 
 ### Run
 
+There's a default payload in the repository for testing purposes (dialogbox.exe), but you can specify any executable as the payload.
+
 ```powershell
 # Execute the UAC bypass
-.\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe
+.\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe c:\path\to\payload.exe 
 
 # Run diagnostic tests
 .\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
