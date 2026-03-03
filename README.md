@@ -9,6 +9,14 @@ The code is written in C#  and based on previous research referenced in the Reso
 
 Being a .Net binary allows us to use it with ExecuteAssembly in-memory execution techniques (supported by most C2 Frameworks), and also makes it easy to modify the payload command without needing to recompile (just change the command line argument).
 
+Clone the repository and build the project using MSBuild or Visual Studio:
+
+```powershell
+git clone https://github.com/ThreathuntingAcademy/FODHelperUACBypass_NG.git
+```
+
+build the project using MSBuild or Visual Studio:
+
 ```powershell
 # Using MSBuild
 msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
