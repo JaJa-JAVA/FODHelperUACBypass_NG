@@ -150,7 +150,7 @@ Our stub translates from Windows calling convention to syscall convention before
 ### Project Structure
 
 ```
-regfod/
+FODHelperUACBypass_NG/
 ├── Program.cs           # Main entry point, orchestrates the UAC bypass
 ├── Native.cs            # Indirect syscall infrastructure and NT API wrappers
 ├── Helpers.cs           # High-level helper functions for registry, processes, etc.
@@ -576,20 +576,20 @@ NtDeleteKey()
 
 ```powershell
 # Using MSBuild
-msbuild regfod\regfod.csproj /p:Configuration=Release /p:Platform=x64
+msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
 
 # Or using Visual Studio
-# Open regfod.sln and build in Release/x64
+# Open FODHelperUACBypass_NG.sln and build in Release/x64
 ```
 
 ### Run
 
 ```powershell
 # Execute the UAC bypass
-.\regfod\bin\x64\Release\regfod.exe
+.\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe
 
 # Run diagnostic tests
-.\regfod\bin\x64\Release\regfod.exe -test
+.\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
 ```
 
 ### Expected Output
@@ -611,7 +611,7 @@ msbuild regfod\regfod.csproj /p:Configuration=Release /p:Platform=x64
 ### Diagnostic Tests
 
 ```powershell
-.\regfod.exe -test
+.\FODHelperUACBypass_NG.exe -test
 ```
 
 **Output:**
