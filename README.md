@@ -33,7 +33,7 @@ There's a default payload in the repository for testing purposes (***dialogbox.e
 
 ### Blog 
 
-A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG: Next-Gen Indirect Syscalls](https://threathunting.academy/blog/fodhelper-uac-bypass-ng-next-gen
+A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://threathuntingacademy.github.io/2026/02/27/FOD.html)
 
 ### Youtube Demo
 
