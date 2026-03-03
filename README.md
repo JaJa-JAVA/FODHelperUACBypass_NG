@@ -40,11 +40,11 @@ There's a default payload in the repository for testing purposes (***dialogbox.e
 .\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
 ```
 
-### Blog 
+## Blog 
 
 A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://threathuntingacademy.github.io/2026/02/27/FOD.html)
 
-### Youtube Demo
+## Youtube Demo
 
 [![FODHelperUACBypass_NG Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
 
