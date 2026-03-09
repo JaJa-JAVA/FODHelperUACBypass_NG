@@ -87,16 +87,6 @@ In the demo we use actual `cobaltstrike` payloads and an evasive loader written 
 
 ---
 
-## Resources
-
-- **Original Research**: EvasiveSyscallInjector project (working x64 implementation)
-- **Hell's Gate**: VX Underground - Direct Syscalls paper
-- **Halo's Gate**: Sektor7 - Evading EDR with Halos Gate
-- **NT API Documentation**: Undocumented NT Functions (ntinternals.net)
-- **Fodhelper UAC Bypass**: @winscripting (original technique)
-
----
-
 ## Security Notice
 
 **Legal and Ethical Use Only**
