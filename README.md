@@ -67,6 +67,8 @@ From an unprivileged beacon, you can execute the UAC bypass with the following c
 inlineExecute-Assembly --dotnetassembly /opt/cobaltstrike/payloads/FODHelperUACBypass_NG.exe --assemblyargs "notepad.exe
 ```
 
+Github repo inlineExecute-Assembly: <https://github.com/anthemtotheego/InlineExecute-Assembly>
+
 ---
 
 ## Blog 
@@ -75,7 +77,7 @@ A blog post and detailed explanation of the technique can be found in the blog p
 
 ## Youtube Demo
 
-![FODHelperUACBypass_NG Demo](https://youtu.be/nCyWBg6tdaw)
+[FODHelperUACBypass_NG Demo](https://youtu.be/nCyWBg6tdaw)
 
 In the demo we use actual `cobaltstrike` payloads and an evasive loader written in .net to demonstrate the technique in a real-world scenario. The payloads are generated with `cobaltstrike`, the loader fetches them and then executes them via the UAC bypass (resulting in a beacon in high integrity).
 
