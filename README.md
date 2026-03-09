@@ -71,11 +71,11 @@ inlineExecute-Assembly --dotnetassembly /opt/cobaltstrike/payloads/FODHelperUACB
 
 ## Blog 
 
-A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://threathuntingacademy.github.io/2026/02/27/FOD.html)
+A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://www.threathuntingacademy.com/blog)
 
 ## Youtube Demo
 
-[![FODHelperUACBypass_NG Demo](https://youtu.be/nCyWBg6tdaw)
+![FODHelperUACBypass_NG Demo](https://youtu.be/nCyWBg6tdaw)
 
 In the demo we use actual `cobaltstrike` payloads and an evasive loader written in .net to demonstrate the technique in a real-world scenario. The payloads are generated with `cobaltstrike`, the loader fetches them and then executes them via the UAC bypass (resulting in a beacon in high integrity).
 
