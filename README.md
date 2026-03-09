@@ -73,7 +73,7 @@ Github repo inlineExecute-Assembly: <https://github.com/anthemtotheego/InlineExe
 
 ## Blog 
 
-A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://www.threathuntingacademy.com/blog)
+A blog post and detailed explanation of the technique can be found in the blog post: [FODHelper UAC Bypass NG](https://www.threathuntingacademy.com/post/bypassing-microsoft-defender-for-endpoint-mde-with-9-year-old-uac-bypass-technique-fodhelper-exe)
 
 ## Youtube Demo
 
