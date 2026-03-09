@@ -75,7 +75,7 @@ A blog post and detailed explanation of the technique can be found in the blog p
 
 ## Youtube Demo
 
-[![FODHelperUACBypass_NG Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+[![FODHelperUACBypass_NG Demo](https://youtu.be/nCyWBg6tdaw)
 
 In the demo we use actual `cobaltstrike` payloads and an evasive loader written in .net to demonstrate the technique in a real-world scenario. The payloads are generated with `cobaltstrike`, the loader fetches them and then executes them via the UAC bypass (resulting in a beacon in high integrity).
 

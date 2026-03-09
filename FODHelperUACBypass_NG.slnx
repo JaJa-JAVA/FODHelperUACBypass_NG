@@ -1,9 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="Any CPU" />
-    <Platform Name="x64" />
-  </Configurations>
-  <Project Path="FODHelperUACBypass_NG/FODHelperUACBypass_NG.csproj" Id="6720a091-12b0-46ad-84dc-c1e737447246">
-    <Platform Solution="*|x64" Project="x64" />
-  </Project>
-</Solution>
