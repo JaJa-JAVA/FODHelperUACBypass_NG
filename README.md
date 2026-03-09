@@ -29,9 +29,7 @@ msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Rele
 
 ### Run
 
-There's a default payload in the repository for testing purposes (***dialogbox.exe***), but you can specify any executable as the payload.
-
-![image](https://github.com/ThreathuntingAcademy/FODHelperUACBypass_NG/blob/main/dialog.jpg)
+When no arguments are provided, notepad.exe will be used as the default payload for demonstration purposes. You can specify any command you want as the payload, but make sure to use the full path to the executable.
 
 ```powershell
 # Execute the UAC bypass
@@ -40,6 +38,8 @@ There's a default payload in the repository for testing purposes (***dialogbox.e
 # Run diagnostic tests
 .\FODHelperUACBypass_NG\bin\x64\Release\FODHelperUACBypass_NG.exe -test
 ```
+
+> ***NOTE:*** When using your own payload, make sure it is `signed` (or at least has a code signing cerificate `cloned` - ***Carboncopy/SignatureKid*** can do this). Also, ***have it present on the target system before executing the UAC bypass***, as it is the payload that will be executed when the hijacked registry key is triggered by `fodhelper.exe`. In a real attack scenario, the attacker would need to find a way to get the payload onto the target system (e.g. via phishing, file drop, etc.) before executing the UAC bypass.
 
 ### Expected Output
 
@@ -96,7 +96,7 @@ A blog post and detailed explanation of the technique can be found in the blog p
 
 In the demo we use actual `cobaltstrike` payloads and an evasive loader written in .net to demonstrate the technique in a real-world scenario. The payloads are generated with `cobaltstrike`, the loader fetches them and then executes them via the UAC bypass (resulting in a beacon in high integrity).
 
-- The Evasive Loader is a simple .Net assembly that fetches the payload from a C2 server and executes it in-memory. It is designed to be used as the payload for the UAC bypass, allowing us to demonstrate the technique with real Cobalt Strike beacons. (this is not the purpose of this project, but it serves as a good demonstration of how the UAC bypass can be used in a real attack scenario)
+- The ***Evasive Loader*** is a simple .Net assembly that fetches the payload from a C2 server and executes it in-memory. It is designed to be used as the payload for the UAC bypass, allowing us to demonstrate the technique with real Cobalt Strike beacons. (this is not the purpose of this project, but it serves as a good demonstration of how the UAC bypass can be used in a real attack scenario)
 
 - The evasive loader **needs to be present on the target system** before running the UAC bypass, as it is the payload that will be executed when the hijacked registry key is triggered by `fodhelper.exe`. In a real attack scenario, the attacker would need to find a way to get the evasive loader onto the target system (e.g. via phishing, file drop, etc.) before executing the UAC bypass.
 
