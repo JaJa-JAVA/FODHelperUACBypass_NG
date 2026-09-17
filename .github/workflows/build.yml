@@ -1,0 +1,26 @@
+name: Build FODHelperUACBypass_NG
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build with MSBuild (Release / x64)
+      run: msbuild FODHelperUACBypass_NG\FODHelperUACBypass_NG.csproj /p:Configuration=Release /p:Platform=x64
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: FODHelperUACBypass_NG-Release
+        path: FODHelperUACBypass_NG/bin/x64/Release/*.exe
